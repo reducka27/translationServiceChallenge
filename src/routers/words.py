@@ -11,19 +11,13 @@ import handlers.words as word_item_handler
 router = APIRouter()
 
 
-@router.get(
-    "/word/{word}",
-    response_model=WordItem
-)
+@router.get("/word/{word}", response_model=WordItem)
 async def get_word(word: str) -> WordItem:
     res = await word_item_handler.get_by_name(word)
     return res
 
 
-@router.get(
-    "/words",
-    response_model=Page[WordItem]
-)
+@router.get("/words", response_model=Page[WordItem])
 async def get_words(
     skip: int = 0,
     limit: int = 10,
@@ -43,10 +37,7 @@ async def get_words(
     return res
 
 
-@router.delete(
-    "/word/{word}",
-    response_model=DeletedResult
-)
+@router.delete("/word/{word}", response_model=DeletedResult)
 async def delete_word(word: str) -> DeletedResult:
     res = await word_item_handler.delete(word)
     return res
